@@ -77,3 +77,13 @@ module "avm-managedcluster" {
     network_data_plane  = "cilium"
   }
 }
+
+output "resource_group_name" {
+  value       = azurerm_resource_group.this.name
+  description = "The name of the resource group"
+}
+
+output "aks_cluster_name" {
+  value       = module.avm-managedcluster.name
+  description = "The name of the AKS cluster"
+}

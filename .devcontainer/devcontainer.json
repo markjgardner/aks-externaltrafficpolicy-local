@@ -3,5 +3,6 @@
 	"features": {
 		"ghcr.io/devcontainers/features/azure-cli:1": {},
 		"ghcr.io/devcontainers/features/terraform:1": {}
-	}
+	},
+	"postCreateCommand": "cd /tmp/ && RETINA_VERSION=$(curl -s https://api.github.com/repos/microsoft/retina/releases/latest | jq -r .tag_name) && curl -LO https://github.com/microsoft/retina/releases/download/${RETINA_VERSION}/kubectl-retina-linux-amd64-${RETINA_VERSION}.tar.gz && tar -xzf kubectl-retina-linux-amd64-${RETINA_VERSION}.tar.gz && sudo mv kubectl-retina-linux-amd64 /usr/local/bin/retina && rm kubectl-retina-linux-amd64-${RETINA_VERSION}.tar.gz && chmod +x /usr/local/bin/retina"
 }
