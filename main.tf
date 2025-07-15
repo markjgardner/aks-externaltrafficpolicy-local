@@ -14,7 +14,6 @@ terraform {
 
 provider "azurerm" {
   features {}
-  subscription_id = "***REMOVED***"
 }
 
 locals {
