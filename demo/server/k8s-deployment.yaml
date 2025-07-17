@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: websocket-server
+  labels:
+    app: websocket-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: websocket-server
+  template:
+    metadata:
+      labels:
+        app: websocket-server
+    spec:
+      containers:
+      - name: websocket-server
+        image: ghcr.io/markjgardner/websocketserver:0.2
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: PORT
+          value: "8080"
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: websocket-server
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  selector:
+    app: websocket-server
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
